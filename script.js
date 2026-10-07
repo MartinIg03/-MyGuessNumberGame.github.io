@@ -7,6 +7,8 @@
 // document.querySelector('.guess').value = 23;
 
 //Emplementing the game logic
+const checkBtn = document.querySelector('.check');
+const guessInput = document.querySelector('.guess');
 let secretNumber = Math.trunc(Math.random() * 100) + 1;
 console.log(secretNumber);
 let score = 50;
@@ -25,8 +27,9 @@ const displayGuess = function (guess) {
   document.querySelector('.guess').value = guess;
 };
 
-document.querySelector('.check').addEventListener('click', function () {
-  const guess = Number(document.querySelector('.guess').value);
+const checkGuess = function () {
+  const guess = Number(guessInput.value);
+
   //console.log(guess, typeof guess);
 
   //when there is no input
@@ -57,6 +60,11 @@ document.querySelector('.check').addEventListener('click', function () {
       displayScore(0);
     }
   }
+};
+
+checkBtn.addEventListener('click', checkGuess);
+guessInput.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') checkGuess();
 });
 
 document.querySelector('.again').addEventListener('click', function () {
@@ -66,7 +74,7 @@ document.querySelector('.again').addEventListener('click', function () {
   displayNumber('?');
   //New secretNumber
   secretNumber = Math.trunc(Math.random() * 100) + 1;
-  //console.log(secretNumber);
+  console.log(secretNumber);
   displayGuess('');
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
