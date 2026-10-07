@@ -9,9 +9,17 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  background-color: #222;
 }
 
 body {
+  width: min(100%, 102.4rem);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
   font-family: 'Press Start 2P', sans-serif;
   color: #eee;
   background-color: #222;
@@ -21,99 +29,183 @@ body {
 /* LAYOUT */
 header {
   position: relative;
-  height: 35vh;
+  flex: 0 0 clamp(22rem, 35vh, 32rem);
+  width: 100%;
   border-bottom: 7px solid #eee;
 }
 
 main {
-  height: 65vh;
-  color: #eee;
+  position: relative;
   display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 32rem;
   align-items: center;
   justify-content: space-around;
+  gap: clamp(2rem, 5vw, 6rem);
+  color: #eee;
+}
+
+.left,
+.right {
+  flex: 1;
+  min-width: 0;
 }
 
 .left {
-  width: 52rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .right {
-  width: 52rem;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.5;
 }
 
 /* ELEMENTS STYLE */
 h1 {
-  font-size: 4rem;
-  text-align: center;
+  font-size: clamp(2rem, 4vw, 4rem);
   position: absolute;
-  width: 100%;
   top: 52%;
   left: 50%;
+  width: 100%;
+  text-align: center;
   transform: translate(-50%, -50%);
 }
 
 .number {
-  background: #eee;
-  color: #333;
-  font-size: 6rem;
-  width: 15rem;
-  padding: 3rem 0rem;
-  text-align: center;
   position: absolute;
   bottom: 0;
   left: 50%;
+  width: clamp(12rem, 20vw, 15rem);
+  padding: clamp(2rem, 4vh, 3rem) 0;
+  background: #eee;
+  color: #333;
+  font-size: clamp(3rem, 5vw, 6rem);
+  text-align: center;
   transform: translate(-50%, 50%);
 }
 
 .between {
-  font-size: 1.4rem;
   position: absolute;
   top: 2rem;
   right: 2rem;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  text-align: right;
 }
 
 .again {
   position: absolute;
   top: 2rem;
   left: 2rem;
+  cursor: pointer;
 }
 
 .guess {
-  background: none;
-  border: 4px solid #eee;
-  font-family: inherit;
-  color: inherit;
-  font-size: 5rem;
-  padding: 2.5rem;
-  width: 25rem;
-  text-align: center;
-  display: block;
+  width: min(25rem, 85vw);
   margin-bottom: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 4px solid #eee;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: clamp(3rem, 10vw, 5rem);
+  text-align: center;
 }
 
 .btn {
   border: none;
   background-color: #eee;
   color: #222;
-  font-size: 2rem;
   font-family: inherit;
-  padding: 2rem 3rem;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  padding: clamp(1.2rem, 2vw, 2rem) clamp(1.6rem, 3vw, 3rem);
   cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus-visible {
   background-color: #ccc;
 }
 
+.btn:focus-visible,
+.guess:focus-visible {
+  outline: 3px solid #60b347;
+  outline-offset: 3px;
+}
+
 .message {
-  margin-bottom: 8rem;
-  height: 3rem;
+  height: auto;
+  min-height: 3rem;
+  margin-bottom: clamp(3rem, 8vh, 8rem);
+  line-height: 1.5;
 }
 
 .label-score {
   margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  header {
+    flex-basis: clamp(22rem, 32vh, 28rem);
+  }
+
+  main {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    min-height: 0;
+    padding: 4rem 0;
+  }
+
+  .left,
+  .right {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .left {
+    padding-top: 2rem;
+  }
+
+  .right {
+    padding: 0 1rem;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  .message {
+    margin-bottom: 3rem;
+  }
+
+  .between {
+    top: 2.2rem;
+    right: 1rem;
+    max-width: 42%;
+  }
+
+  .again {
+    top: 1.5rem;
+    left: 1rem;
+    padding: 1.4rem 1.6rem;
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .between {
+    font-size: 0.9rem;
+  }
+
+  .again {
+    font-size: 1.2rem;
+  }
 }
